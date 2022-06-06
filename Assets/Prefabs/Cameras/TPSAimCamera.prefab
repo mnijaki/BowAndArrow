@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7936990974506270643}
   - component: {fileID: 7936990974506270640}
   - component: {fileID: 2984896593564756497}
+  - component: {fileID: 4939014529477923100}
   m_Layer: 0
   m_Name: TPSAimCamera
   m_TagString: Untagged
@@ -119,6 +120,20 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: 6285064091006536041, guid: cc5da16edd8c67f4a897f829862f599e, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &4939014529477923100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7936990974506270641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca95380a68cf9b49b2ea4c9353e50e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputReader: {fileID: 0}
+  _priorityBoostAmount: 10
 --- !u!1 &7936990974742316369
 GameObject:
   m_ObjectHideFlags: 0
