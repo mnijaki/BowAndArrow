@@ -19,10 +19,13 @@ namespace BAA
         private float _gravity = -9.81F;
         [SerializeField]
         private float _jumpHeight = 1.5F;
+        [SerializeField]
+        private GameObject _bulletPrefab;
+        [SerializeField]
+        private Transform _firingPoint;
         
         private Vector3 _movementInput;
         private Vector3 _movement;
-        private bool _shootInput;
         private Vector3 _playerVelocity;
         private bool _isPlayerGrounded;
         private Transform _cameraTransform;
@@ -51,9 +54,21 @@ namespace BAA
         
         private void OnShoot()
         {
-            // TODO:implement
-            //Debug.Log("OnShoot");
-            _shootInput = true;
+            // TODO: change to raycaster
+            GameObject bulletGO = Instantiate(_bulletPrefab, _firingPoint.position, Quaternion.identity);
+            Bullet bullet = bulletGO.GetComponent<Bullet>();
+            
+            RaycastHit hit;
+            if(Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out hit, Mathf.Infinity))
+            {
+                bullet.SetTargetPosition(hit.point);
+                bullet.SetIsMovingTowardVoid(false);
+            }
+            else
+            {
+                bullet.SetTargetPosition(_cameraTransform.position + _cameraTransform.forward * 20);
+                bullet.SetIsMovingTowardVoid(true);
+            }
         }
 
         private void Update()
@@ -116,6 +131,5 @@ namespace BAA
         {
             _playerVelocity.y += _gravity * Time.deltaTime;
         }
-        
     }
 }
