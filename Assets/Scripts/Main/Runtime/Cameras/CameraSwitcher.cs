@@ -33,14 +33,14 @@ namespace BAA
             _inputReader.aimFinishedEvent -= OnAimFinished;
         }
 
-        private void OnAimFinished()
-        {
-            //_virtualCamera.Priority += _priorityBoostAmount;
-        }
-
         private void OnAimStarted()
         {
-            //_virtualCamera.Priority -= _priorityBoostAmount;
+            _virtualCamera.Priority += _priorityBoostAmount;
+        }
+
+        private void OnAimFinished()
+        {
+            _virtualCamera.Priority -= _priorityBoostAmount;
         }
     }
 }
