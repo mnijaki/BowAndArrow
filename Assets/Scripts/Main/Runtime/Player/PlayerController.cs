@@ -1,3 +1,4 @@
+using System;
 using BAA.InputHandling;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -8,24 +9,41 @@ namespace BAA
     {
         [SerializeField]
         private CharacterController controller;
-
         [SerializeField]
         private InputReader _inputReader;
+        [SerializeField]
+        private float _playerSpeed = 2.0F;
+        [SerializeField]
+        private float _rotationSpeed = 5.0F;
+        [SerializeField]
+        private float _gravity = -9.81F;
+        [SerializeField]
+        private float _jumpHeight = 1.5F;
         
-        private const float _GRAVITY_VALUE = -9.81f;
-        private const float _PLAYER_SPEED = 2.0f;
-        private const float _JUMP_HEIGHT = 1.0f;
         private Vector3 _movementInput;
+        private Vector3 _movement;
         private bool _shootInput;
         private Vector3 _playerVelocity;
         private bool _isPlayerGrounded;
+        private Transform _cameraTransform;
+
+        private void Awake()
+        {
+            _cameraTransform = Camera.main.transform;
+        }
 
         private void OnEnable()
-        {
+        { 
             _inputReader.moveEvent += OnMove;
             _inputReader.shootEvent += OnShoot;
         }
-        
+
+        private void OnDisable()
+        {
+            _inputReader.moveEvent -= OnMove;
+            _inputReader.shootEvent -= OnShoot;
+        }
+
         private void OnMove(Vector3 movement)
         {
             _movementInput = movement;
@@ -43,6 +61,7 @@ namespace BAA
             UpdateGroundedFlag();
             ResetVelocityOfPlayerIfNeeded();
             HandleMovement();
+            HandleRotation();
             HandleJump();
         }
 
@@ -61,7 +80,23 @@ namespace BAA
 
         private void HandleMovement()
         {
-            controller.Move(_movementInput * (Time.deltaTime * _PLAYER_SPEED));
+            ApplyCameraDirectionToMovement();
+            
+            controller.Move(_movement * (Time.deltaTime * _playerSpeed));
+        }
+        
+        private void ApplyCameraDirectionToMovement()
+        {
+            // This will transform input movement vector to current camera view.
+            _movement = _movementInput.x * _cameraTransform.right.normalized + _movementInput.z * _cameraTransform.forward.normalized;
+            _movement.y = 0.0F;
+        }
+
+        private void HandleRotation()
+        {
+            // Rotate player in direction where camera is facing.
+            Quaternion targetRotation = Quaternion.Euler(0.0F,_cameraTransform.eulerAngles.y,0.0F);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
 
         private void HandleJump()
@@ -69,7 +104,7 @@ namespace BAA
             if (_inputReader.Jumped && _isPlayerGrounded)
             {
                 // TODO: that 3.0
-                _playerVelocity.y += Mathf.Sqrt(_JUMP_HEIGHT * -3.0f * _GRAVITY_VALUE);
+                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravity);
             }
 
             HandleGravity();
@@ -79,7 +114,7 @@ namespace BAA
 
         private void HandleGravity()
         {
-            _playerVelocity.y += _GRAVITY_VALUE * Time.deltaTime;
+            _playerVelocity.y += _gravity * Time.deltaTime;
         }
         
     }

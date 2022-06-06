@@ -16,6 +16,7 @@ namespace BAA.InputHandling
 
         private void OnEnable()
         {
+            // TODO: unsubscribe?
             if (gameInput == null)
             {
                 gameInput = new GameInput();
