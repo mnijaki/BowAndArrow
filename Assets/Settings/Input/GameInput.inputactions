@@ -1,8 +1,8 @@
 {
-    "name": "InputActions",
+    "name": "GameInput",
     "maps": [
         {
-            "name": "Player",
+            "name": "Gameplay",
             "id": "ee45914d-85da-43a8-9fb3-ddc8b58b24d9",
             "actions": [
                 {
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Look",
+                    "name": "CameraMove",
                     "type": "Value",
                     "id": "a7804614-4b27-49fd-b34e-a9728e6cb72b",
                     "expectedControlType": "Vector2",
@@ -136,7 +136,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Look",
+                    "action": "CameraMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -154,5 +154,17 @@
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "KeyboardScheme",
+            "bindingGroup": "KeyboardScheme",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }
