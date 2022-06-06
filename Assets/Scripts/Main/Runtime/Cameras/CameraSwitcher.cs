@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BAA.InputHandling;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BAA
 {
@@ -13,6 +14,13 @@ namespace BAA
         private InputReader _inputReader;
         [SerializeField]
         private int _priorityBoostAmount = 10;
+        // TODO: extract to own file invoked on event
+        [SerializeField]
+        private Image _crosshairImage;
+        [SerializeField]
+        private Sprite _defaultCrosshair;
+        [SerializeField]
+        private Sprite _aimedCrosshair;
 
         private CinemachineVirtualCamera _virtualCamera;
 
@@ -35,11 +43,13 @@ namespace BAA
 
         private void OnAimStarted()
         {
+            _crosshairImage.sprite = _aimedCrosshair;
             _virtualCamera.Priority += _priorityBoostAmount;
         }
 
         private void OnAimFinished()
         {
+            _crosshairImage.sprite = _defaultCrosshair;
             _virtualCamera.Priority -= _priorityBoostAmount;
         }
     }

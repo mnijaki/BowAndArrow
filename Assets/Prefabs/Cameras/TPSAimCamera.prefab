@@ -103,6 +103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputReader: {fileID: 0}
   _priorityBoostAmount: 10
+  _crosshairImage: {fileID: 0}
+  _defaultCrosshair: {fileID: 21300000, guid: 7df56743e32b54e4fb2b4b7054c4cb31, type: 3}
+  _aimedCrosshair: {fileID: 21300000, guid: 99f23ff6a9f30de4a9456d487c6adcf2, type: 3}
 --- !u!1 &7936990974742316369
 GameObject:
   m_ObjectHideFlags: 0
