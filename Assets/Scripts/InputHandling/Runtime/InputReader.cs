@@ -10,6 +10,8 @@ namespace BAA.InputHandling
         public event UnityAction<Vector3> moveEvent = delegate { };
         public event UnityAction shootEvent = delegate { };  
         public event UnityAction<Vector2> cameraMoveEvent = delegate { };
+        public event UnityAction aimStartedEvent = delegate { };  
+        public event UnityAction aimFinishedEvent = delegate { };  
         public bool Jumped { get; private set; }
 
         private GameInput gameInput;
@@ -41,7 +43,6 @@ namespace BAA.InputHandling
             gameInput.Gameplay.Disable();
         }
 
-        
         public void OnMove(InputAction.CallbackContext context)
         {
             Vector2 movement2D = context.ReadValue<Vector2>();
@@ -67,8 +68,15 @@ namespace BAA.InputHandling
 
         public void OnAim(InputAction.CallbackContext context)
         {
-            // TODO: implement
-            throw new System.NotImplementedException();
+            switch(context.phase)
+            {
+                case InputActionPhase.Performed:
+                    aimStartedEvent.Invoke();
+                    break;
+                case InputActionPhase.Canceled:
+                    aimFinishedEvent.Invoke();
+                    break;
+            }
         }
     }
 }
