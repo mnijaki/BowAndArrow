@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace BAA
+namespace BAA.InputHandling
 {
     public partial class @InputActions : IInputActionCollection2, IDisposable
     {
