@@ -16,6 +16,17 @@ namespace BAA
 
         private Vector3 _targetPosition;
         private bool _isMovingTowardVoid;
+        private Rigidbody _rigidbody;
+
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void Start()
+        {
+            AddForce();
+        }
 
         private void OnEnable()
         {
@@ -24,7 +35,6 @@ namespace BAA
 
         private void Update()
         {
-            Move();
             HandleMovementTowardsVoid();
         }
 
@@ -38,9 +48,12 @@ namespace BAA
             _isMovingTowardVoid = isMovingTowardVoid;
         }
 
-        private void Move()
+        private void AddForce()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
+            Vector3 dir = _targetPosition - transform.position;
+            dir = dir.normalized;
+            Vector3 force = dir * _speed;
+            _rigidbody.AddForce(force,ForceMode.Impulse);
         }
 
         private void HandleMovementTowardsVoid()
@@ -53,8 +66,6 @@ namespace BAA
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("entered colision");
-            
             ContactPoint contactPoint = collision.GetContact(0);
             Instantiate(_explosionParticlePrefab, contactPoint.point, Quaternion.LookRotation(contactPoint.normal));
             
