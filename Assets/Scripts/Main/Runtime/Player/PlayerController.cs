@@ -23,6 +23,8 @@ namespace BAA
         private GameObject _bulletPrefab;
         [SerializeField]
         private Transform _firingPoint;
+        [SerializeField]
+        private LayerMask _bulletInteractionLayers;
         
         private Vector3 _movementInput;
         private Vector3 _movement;
@@ -59,7 +61,8 @@ namespace BAA
             Bullet bullet = bulletGO.GetComponent<Bullet>();
             
             RaycastHit hit;
-            if(Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out hit, Mathf.Infinity))
+            if(Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, 
+                               out hit, Mathf.Infinity, _bulletInteractionLayers))
             {
                 bullet.SetTargetPosition(hit.point);
                 bullet.SetIsMovingTowardVoid(false);
