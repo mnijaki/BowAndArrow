@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9100798638401916027}
   - component: {fileID: 8914671146265824592}
   - component: {fileID: 7498201526459761185}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,6 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3832890388133074034}
+  - component: {fileID: 1742189876485670262}
   m_Layer: 6
   m_Name: Elevator
   m_TagString: Untagged
@@ -227,3 +228,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1742189876485670262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6673459817652082357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05ea550fe0d3ec4e918bcac42bfdaf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _starPosition: {x: 0, y: 0, z: 0}
+  _endPosition: {x: 0, y: 0, z: 0}
