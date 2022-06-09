@@ -355,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718768630170920201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.489, y: 0.177, z: 1.027}
+  m_LocalPosition: {x: 0.489, y: 0.177, z: 1.527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -541,6 +541,7 @@ MonoBehaviour:
   _playerSpeed: 400
   _rotationSpeed: 5
   _jumpForce: 650
+  _weaponGO: {fileID: 0}
   _bulletPrefab: {fileID: 4923162851484078083, guid: 8c11fa707219bac458af262708fd1e7a,
     type: 3}
   _firingPoint: {fileID: 718768630170920200}

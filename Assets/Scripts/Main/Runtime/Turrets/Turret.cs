@@ -13,7 +13,7 @@ namespace BAA
         
         private void Start()
         {
-            InvokeRepeating(nameof(Shoot), Random.Range(0.1F,3.0F),Random.Range(0.1F,3.0F));
+            InvokeRepeating(nameof(Shoot), Random.Range(1.1F,4.0F),Random.Range(1.1F,4.0F));
         }
 
         private void Shoot()

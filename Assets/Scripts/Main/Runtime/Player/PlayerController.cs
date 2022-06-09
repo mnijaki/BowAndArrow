@@ -1,5 +1,7 @@
+using System;
 using BAA.InputHandling;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BAA
 {
@@ -161,6 +163,14 @@ namespace BAA
         {
             _weaponGO.SetActive(true);
             _isWeaponEnabled = true;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.GetComponent<Bullet>())
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 }
