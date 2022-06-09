@@ -7,7 +7,8 @@ namespace BAA
     {
         private void OnTriggerEnter(Collider other)
         {
-            SceneManager.LoadScene(0);
+            if(other.GetComponent<PlayerController>())
+                SceneManager.LoadScene(0);
         }
     }
 }
