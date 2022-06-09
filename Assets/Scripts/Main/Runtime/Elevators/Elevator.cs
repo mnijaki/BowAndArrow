@@ -1,38 +1,60 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BAA
 {
     public class Elevator : MonoBehaviour
     {
         [SerializeField]
-        private Vector3 _starPosition;
+        private Transform _upperTarget;
         [SerializeField]
-        private Vector3 _endPosition;
-        
+        private Transform _bottomTarget;
+        [SerializeField]
+        private float _moveSpeed = 2.0F;
+        [SerializeField]
+        private AnimationCurve _moveCurve;
+
+        private Vector3 _startPos;
+        private Coroutine _moveUpCoroutine;
+        private Coroutine _moveDownCoroutine;
+        private readonly WaitForFixedUpdate _waitTime = new();
+
         private void OnTriggerEnter(Collider other)
         {
-            StopAllCoroutines();
-            StartCoroutine(MoveUp());
+            if(_moveUpCoroutine!= null) StopCoroutine(_moveUpCoroutine);
+            if(_moveDownCoroutine!= null) StopCoroutine(_moveDownCoroutine);
+
+            _startPos = transform.position;
+            _moveUpCoroutine = StartCoroutine(MoveWithFixedSpeed(_upperTarget.position));
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if(_moveUpCoroutine!= null) StopCoroutine(_moveUpCoroutine);
+            if(_moveDownCoroutine!= null) StopCoroutine(_moveDownCoroutine);
+            
+            _startPos = transform.position;
+            _moveDownCoroutine = StartCoroutine(MoveWithFixedSpeed(_bottomTarget.position));
         }
         
-
-        private IEnumerator MoveUp()
+        private IEnumerator MoveWithFixedSpeed(Vector3 targetPos)
         {
-            int counter = 0;
-            while(transform.position != _endPosition)
+            while (true)
             {
-                counter++;
-                if(counter > 1000)
+                float distance = Vector3.Distance(_startPos, targetPos);
+                float remainingDistance = distance;
+                while (remainingDistance > 0)
                 {
-                    Debug.Log("err");
-                    StopAllCoroutines();
+                    float t = _moveCurve.Evaluate(1 - (remainingDistance / distance));
+                    transform.position = Vector3.Lerp(_startPos, targetPos, t);
+                    remainingDistance -= _moveSpeed * Time.deltaTime;
+                    yield return _waitTime;
                 }
-                transform.position = Vector3.Lerp(_starPosition, _endPosition, Time.deltaTime);
+
+                transform.position = targetPos;
+                break;
             }
-            yield return null;
         }
     }
 }
