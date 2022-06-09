@@ -5,32 +5,10 @@ namespace BAA
     // Example MonoBehaviour that oscillates a transform position between two points.
     public class Platform : MonoBehaviour
     {
-        [SerializeField]
-        private Vector3 _startPos = new Vector3(-10, 0f, 0f);
-
-        [SerializeField]
-        private Vector3 _endPos = new Vector3(10f, 0f, 0f);
-
-        [SerializeField]
-        private float _moveSpeed = .2f;
-
-        public Vector3 StartPos
-        {
-            get => _startPos;
-            set => _startPos = value;
-        }
-
-        public Vector3 EndPos
-        {
-            get => _endPos;
-            set => _endPos = value;
-        }
-
-        public float MoveSpeed
-        {
-            get => _moveSpeed;
-            set => _moveSpeed = value;
-        }
+        // TODO: I dont like making fields public only so tooling would be easier...
+        public Vector3 StartPos = new Vector3(-10.0F, 0.0F, 0.0F);
+        public Vector3 EndPos = new Vector3(10.0F, 0.0F, 0.0F);
+        public float MoveSpeed = 0.2F;
 
         private void Update()
         {
@@ -39,7 +17,7 @@ namespace BAA
 
         public void SnapToPath(float time)
         {
-            transform.position = Vector3.Lerp(_startPos, _endPos, (Mathf.Sin(time * _moveSpeed) + 1) * .5f);
+            transform.position = Vector3.Lerp(StartPos, EndPos, (Mathf.Sin(time * MoveSpeed) + 1) * .5f);
         }
     }
 }
