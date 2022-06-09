@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BAA
 {
@@ -8,7 +9,7 @@ namespace BAA
         private Vector3 _rotationSpeed;
 
         [SerializeField]
-        private Platform _platformToEnable;
+        private Platform _platformToDestroy;
         
         private void Update()
         {
@@ -24,7 +25,7 @@ namespace BAA
             }
             
             playerController.EnableWeapon();
-            _platformToEnable.enabled = true;
+            Destroy(_platformToDestroy.gameObject);
             Destroy(gameObject);
         }
     }

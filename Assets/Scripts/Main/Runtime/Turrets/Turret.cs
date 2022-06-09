@@ -11,6 +11,14 @@ namespace BAA
         [SerializeField]
         private Transform _firingPoint;
         
+        private static int _destroyedObjects = 0;
+        public static event Action<int> DestroyedObjectsCounterChanged;
+
+        private void Awake()
+        {
+            _destroyedObjects = 0;
+        }
+
         private void Start()
         {
             InvokeRepeating(nameof(Shoot), Random.Range(1.1F,4.0F),Random.Range(1.1F,4.0F));
@@ -29,7 +37,8 @@ namespace BAA
         {
             if(collision.gameObject.GetComponent<Bullet>())
             {
-                Debug.Log("should add points");
+                _destroyedObjects++;
+                DestroyedObjectsCounterChanged.Invoke(_destroyedObjects);
                 Destroy(gameObject);
             }
         }

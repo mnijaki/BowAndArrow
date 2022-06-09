@@ -34,7 +34,12 @@ namespace BAA
         private Transform _cameraTransform;
         private Rigidbody _rigidbody;
         private bool _isWeaponEnabled;
-        
+        private int _jumpsCounter = 0;
+        // TODO: this should be in some other clas eg. gamemanager
+        private int _timeSinceStartup = 0;
+
+        public static event Action<int> JumpsCounterChanged; 
+
         private void Awake()
         {
             _cameraTransform = Camera.main.transform;
@@ -140,6 +145,9 @@ namespace BAA
             }
             
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+
+            _jumpsCounter++;
+            JumpsCounterChanged.Invoke(_jumpsCounter);
         }
         
         private bool CanJump()
