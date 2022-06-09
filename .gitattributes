@@ -59,7 +59,7 @@
 # I am not sure if this should be uncommented
 # ...
 
-#*SDF* filter=lfs diff=lfs merge=lfs -text
+*SDF* filter=lfs diff=lfs merge=lfs -text
 #*.lfs.* filter=lfs diff=lfs merge=lfs -text
 
 #*.dll filter=lfs diff=lfs merge=lfs -text
