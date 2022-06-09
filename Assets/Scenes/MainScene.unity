@@ -1015,6 +1015,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1396398299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 718768629156591140, guid: 78669deb72140104aaf78407e83a8fba,
+    type: 3}
+  m_PrefabInstance: {fileID: 718768630013751039}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1457741491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 858783605456659948, guid: 3f5349d19ecbef141a1d018a0dae9ece,
@@ -1727,6 +1733,16 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1387313945}
     m_Modifications:
+    - target: {fileID: 718768629156591140, guid: 78669deb72140104aaf78407e83a8fba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 718768630899233325, guid: 78669deb72140104aaf78407e83a8fba,
+        type: 3}
+      propertyPath: _weaponGO
+      value: 
+      objectReference: {fileID: 1396398299}
     - target: {fileID: 718768630899233325, guid: 78669deb72140104aaf78407e83a8fba,
         type: 3}
       propertyPath: _inputReader

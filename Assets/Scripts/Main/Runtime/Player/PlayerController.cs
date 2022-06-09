@@ -14,6 +14,8 @@ namespace BAA
         [SerializeField]
         private float _jumpForce = 650.0F;
         [SerializeField]
+        private GameObject _weaponGO;
+        [SerializeField]
         private GameObject _bulletPrefab;
         [SerializeField]
         private Transform _firingPoint;
@@ -29,6 +31,7 @@ namespace BAA
         private Vector3 _playerVelocity;
         private Transform _cameraTransform;
         private Rigidbody _rigidbody;
+        private bool _isWeaponEnabled;
         
         private void Awake()
         {
@@ -58,6 +61,11 @@ namespace BAA
         
         private void OnShoot()
         {
+            if(!_isWeaponEnabled)
+            {
+                return;
+            }
+            
             // TODO: change to raycaster
             GameObject bulletGO = Instantiate(_bulletPrefab, _firingPoint.position, Quaternion.identity);
             Bullet bullet = bulletGO.GetComponent<Bullet>();
@@ -147,6 +155,12 @@ namespace BAA
         private bool IsInTheAir()
         {
             return (_rigidbody.velocity.y > 0.1F);
+        }
+
+        public void EnableWeapon()
+        {
+            _weaponGO.SetActive(true);
+            _isWeaponEnabled = true;
         }
     }
 }
